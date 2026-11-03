@@ -1,0 +1,10 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "kanso",
+  "main": "src/index.js",
+  "compatibility_date": "2026-10-20",
+  "rules": [{ "type": "Text", "globs": ["**/*.html"], "fallthrough": true }],
+  "routes": [{ "pattern": "kanso.hanzalahwaheed.com", "custom_domain": true }],
+  "workers_dev": false,
+  "observability": { "enabled": true }
+}

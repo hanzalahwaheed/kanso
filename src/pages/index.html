@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kanso</title>
+<style>
+  :root { color-scheme: light dark; --fg: #1a1a1a; --muted: #6b6b6b; --bg: #fdfdfb; --line: #d8d8d4; }
+  @media (prefers-color-scheme: dark) { :root { --fg: #e8e6e1; --muted: #9a978f; --bg: #161615; --line: #3a3936; } }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 18px/1.6 Charter, Georgia, serif; }
+  main { max-width: 36rem; margin: 22vh auto 0; padding: 0 16px; }
+  h1 { font-size: 1.6rem; margin: 0 0 .25rem; }
+  p { color: var(--muted); margin: 0 0 1.5rem; }
+  form { display: flex; gap: .5rem; }
+  input { flex: 1; min-width: 0; font: inherit; font-size: 1rem; padding: .6rem .75rem; border: 1px solid var(--line); border-radius: 6px; background: transparent; color: inherit; }
+  button { font: inherit; font-size: 1rem; padding: .6rem 1rem; border: 0; border-radius: 6px; background: var(--fg); color: var(--bg); cursor: pointer; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Kanso <span lang="ja">簡素</span></h1>
+  <p>Paste an X post or a blog link. Read only the article.</p>
+  <form action="/read" method="get">
+    <input name="url" type="url" placeholder="https://x.com/…/status/…" required autofocus>
+    <button>Read</button>
+  </form>
+</main>
+</body>
+</html>

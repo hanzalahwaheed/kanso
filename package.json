@@ -1,0 +1,22 @@
+{
+  "name": "kanso",
+  "version": "1.0.0",
+  "description": "Paste an X post or a blog link. Read only the article.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@mozilla/readability": "^0.6.0",
+    "linkedom": "^0.18.15"
+  },
+  "devDependencies": {
+    "wrangler": "^4.157.0"
+  }
+}
