@@ -3,11 +3,23 @@ import { extractWeb } from './extract-web.js';
 import indexPage from './pages/index.html';
 import readerPage from './pages/reader.html';
 import errorPage from './pages/error.html';
+import favicon from '../brand/favicon.svg';
+import lockup from '../brand/kanso-lockup.svg';
+import mark from '../brand/kanso-mark.svg';
 
 const esc = (s) =>
   String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 
 const fill = (template, values) => template.replace(/{{(\w+)}}/g, (_, key) => values[key] ?? '');
+
+// Inline the logos in the text color, so they follow the light and dark themes.
+const inlineLogo = (svg, className) =>
+  svg
+    .replaceAll('#111', 'currentColor')
+    .replace('<svg ', `<svg class="${className}" role="img" aria-label="Kanso" `)
+    .replace(/ (width|height)="\d+"/g, '');
+
+const brand = { lockup: inlineLogo(lockup, 'lockup'), mark: inlineLogo(mark, 'mark') };
 
 // Map a request path to the article URL, so a link works after only its host is swapped:
 //   /addyosmani/status/123         -> https://x.com/addyosmani/status/123
@@ -30,6 +42,7 @@ async function renderReader(target) {
     ? article.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
     : '';
   return fill(readerPage, {
+    ...brand,
     title: esc(article.title),
     meta: esc([article.byline, date].filter(Boolean).join(' · ')),
     source: esc(article.source),
@@ -49,13 +62,17 @@ const html = (status, body, cache = 'no-store') =>
     },
   });
 
-const errorResponse = (status, message) => html(status, fill(errorPage, { message: esc(message) }));
+const errorResponse = (status, message) => html(status, fill(errorPage, { ...brand, message: esc(message) }));
 
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
-    if (url.pathname === '/') return html(200, indexPage, 'public, max-age=3600');
-    if (url.pathname === '/favicon.ico') return new Response(null, { status: 404 });
+    if (url.pathname === '/') return html(200, fill(indexPage, brand), 'public, max-age=3600');
+    if (url.pathname === '/favicon.svg' || url.pathname === '/favicon.ico') {
+      return new Response(favicon, {
+        headers: { 'content-type': 'image/svg+xml', 'cache-control': 'public, max-age=86400' },
+      });
+    }
 
     const target = url.pathname === '/read' ? url.searchParams.get('url')?.trim() : targetFromPath(url);
     if (!target || !/^https?:\/\//i.test(target)) {

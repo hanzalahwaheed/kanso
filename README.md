@@ -25,4 +25,6 @@ Kanso is one Cloudflare Worker ([src/index.js](src/index.js)).
 - **X links**: X renders posts in the browser, so the raw HTML has no article text. The Worker asks the public fxtwitter API (`api.fxtwitter.com`) for the post. X Articles come back as Draft.js blocks, which [src/extract-x.js](src/extract-x.js) turns into HTML.
 - **Other links**: [src/extract-web.js](src/extract-web.js) downloads the page and runs Mozilla Readability (the Firefox Reader View engine) on it, with linkedom as the DOM.
 
+The logo files are in [brand/](brand/). The pages use the system font, the same default as Claude artifacts.
+
 Rendered pages stay in the Cloudflare edge cache for one hour. Every page is sent with a CSP that blocks all scripts.
