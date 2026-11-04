@@ -10,20 +10,19 @@
   :root {
     color-scheme: light dark;
     --fg: #111111; --muted: #6b6b6b; --bg: #fcfcfc; --line: #e2e2e2; --code: #f1f1f1;
-    --sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --serif: Charter, Georgia, serif;
     --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   }
   @media (prefers-color-scheme: dark) { :root { --fg: #f5f5f5; --muted: #9a9a9a; --bg: #111111; --line: #2c2c2c; --code: #1c1c1c; } }
-  body { margin: 0; background: var(--bg); color: var(--fg); font: 18px/1.7 var(--sans); }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 19px/1.65 var(--serif); }
   article { max-width: 40rem; margin: 0 auto; padding: 1.5rem 16px 6rem; overflow-wrap: break-word; }
   nav { font-size: .85rem; margin-bottom: 2.5rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
   nav a { color: var(--muted); }
   nav .home { color: var(--fg); line-height: 0; }
   .mark { height: 1.75rem; width: auto; }
-  h1 { font-size: 2.1rem; line-height: 1.2; font-weight: 650; letter-spacing: -.02em; margin: 0 0 .5rem; text-wrap: balance; }
+  h1 { font-size: 2.1rem; line-height: 1.2; margin: 0 0 .5rem; text-wrap: balance; }
   .meta { color: var(--muted); font-size: .9rem; margin: 0 0 2rem; }
-  h2, h3 { line-height: 1.3; font-weight: 600; letter-spacing: -.01em; margin: 2.2rem 0 .6rem; text-wrap: balance; }
-  strong, b { font-weight: 600; }
+  h2, h3 { line-height: 1.3; margin: 2.2rem 0 .6rem; text-wrap: balance; }
   a { color: inherit; text-underline-offset: 3px; }
   a:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; }
   img, video { max-width: 100%; height: auto; border-radius: 4px; }
